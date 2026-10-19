@@ -1,0 +1,159 @@
+# Boss Configuration: Example Boss
+# Version: 1.0.0
+# このファイルをコピーして新しいボスを作成してください
+
+# Internal boss ID (must be unique)
+id: "example_boss"
+
+# Whether this boss is enabled (default: true)
+enabled: true
+
+# Display name for messages (color codes supported)
+display-name: "&c&lドラゴンキング"
+
+# MythicMobs mob ID
+mythic-mob-id: "DragonKing"
+
+# Time limit in seconds (default: 300)
+# In normal mode: player loses when time expires
+# In survival mode: player wins when time expires
+time-limit: 600
+
+# Survival mode (time endurance mode)
+# When enabled, player wins by surviving until time expires instead of defeating the boss
+# When disabled (default), player must defeat the boss before time expires
+survival-mode: false
+
+# Show remaining time in boss bar (default: true)
+show-time-bossbar: true
+
+# Boss bar customization (optional)
+bossbar:
+  # Color: BLUE, GREEN, PINK, PURPLE, RED, WHITE, YELLOW
+  color: "RED"
+  # Style: SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
+  style: "SOLID"
+  # Title format placeholders: {boss_name}, {mode}, {time}
+  title-format: "&c{boss_name} &7[{mode}] &e{time}"
+
+# Sound settings (optional)
+# Use Minecraft sound names like: entity.ender_dragon.growl, entity.wither.spawn
+# Full list: https://minecraft.wiki/w/Sounds.json
+sounds:
+  # Sound when battle starts
+  battle-start:
+    sound: "entity.ender_dragon.growl"
+    volume: 1.0
+    pitch: 1.0
+  # Looping sound during battle (optional)
+  battle-loop:
+    sound: ""
+    volume: 0.5
+    pitch: 1.0
+    interval: 100  # Interval in ticks (20 ticks = 1 second)
+  # Sound when player wins
+  victory:
+    sound: "ui.toast.challenge_complete"
+    volume: 1.0
+    pitch: 1.0
+  # Sound when player loses
+  defeat:
+    sound: "entity.wither.death"
+    volume: 1.0
+    pitch: 0.5
+
+# Item collection time after boss defeat in seconds (default: 30)
+item-collection-time: 45
+
+# Invincibility time at battle start in seconds (optional)
+invincibility-time: 3
+
+# Boss level for MythicMobs (optional, default: 1)
+boss-level: 1
+
+# Boss spawn delay in ticks (20 ticks = 1 second, default: 20)
+# Allows chunk to load after player teleport before spawning boss
+boss-spawn-delay: 20
+
+# Blindness duration in seconds when player teleports (default: 0 = disabled)
+# Useful for dramatic effect and to hide chunk loading
+teleport-blindness-duration: 2
+
+# Locations
+locations:
+  # Where player teleports when battle starts
+  teleport:
+    world: "world"
+    x: 100.5
+    y: 65.0
+    z: 200.5
+    yaw: 0.0
+    pitch: 0.0
+
+  # Pre-battle waiting location (optional)
+  waiting:
+    world: "world"
+    x: 95.5
+    y: 65.0
+    z: 195.5
+    yaw: 0.0
+    pitch: 0.0
+
+  # Where boss spawns
+  boss-spawn:
+    world: "world"
+    x: 100.5
+    y: 65.0
+    z: 220.5
+    yaw: 180.0
+    pitch: 0.0
+
+  # Where player teleports after battle ends
+  exit:
+    world: "world"
+    x: 0.5
+    y: 100.0
+    z: 0.5
+    yaw: 0.0
+    pitch: 0.0
+
+# Boss-specific messages (optional, overrides defaults)
+messages:
+  start: "&4&l{boss_name}&rが目覚めた... 覚悟しろ！"
+  victory: "&6圧倒的な勝利！&e{boss_name}&rを&a{time}&rで打ち倒した！"
+  defeat: "&4{boss_name}&rの炎に焼き尽くされた..."
+  timeout: "&4時間切れ... {boss_name}&rは逃げ去った..."
+  # Broadcast messages sent to all online players (optional)
+  victory-broadcast: "&6【討伐速報】&e{player}&rが&c{boss_name}&rを&a{time}&rで討伐しました！"
+  defeat-broadcast: ""
+
+# Time warning configuration
+# Format: seconds_remaining: "message"
+time-warnings:
+  300: "&e残り&c5分&r！"
+  180: "&e残り&c3分&r！"
+  60: "&c&l残り1分！&r急げ！"
+  30: "&4&l残り30秒！！"
+  10: "&4&l&n残り10秒！！！"
+
+# Commands to execute when boss is defeated
+# Placeholders: {player}, {boss_id}, {boss_name}, {time}, {time_ms}
+victory-commands:
+  - "give {player} diamond 5"
+  - "eco give {player} 10000"
+  - "say {player}が{boss_name}を{time}で討伐！"
+
+# Commands to execute when player fails (death/timeout/logout)
+defeat-commands:
+  - "say {player}は{boss_name}に敗北した..."
+
+# Chain Battle Configuration (optional)
+# Allows multiple bosses to appear in sequence
+chain-battle:
+  # Enable chain battle for this boss
+  enabled: false
+  # List of boss IDs to spawn after this boss is defeated
+  # Each boss uses its own config for time limits, messages, etc.
+  boss-list:
+    - "second_boss"
+    - "third_boss"

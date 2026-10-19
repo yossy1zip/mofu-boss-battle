@@ -1,0 +1,49 @@
+# MofuBossBattle Configuration
+# Version: 0.0.2
+
+# Database settings (MySQL)
+database:
+  host: "localhost"
+  port: 3306
+  database: "mofubossbattle"
+  username: "root"
+  password: "change-me"
+  pool-size: 10
+
+# Global settings
+settings:
+  # Prefix for all plugin messages
+  prefix: "&8[&6MofuBossBattle&8] "
+
+  # Default time limit if not specified per boss (seconds)
+  default-time-limit: 300
+
+  # Default item collection time after boss defeat (seconds)
+  default-item-collection-time: 30
+
+  # Allow players to start boss battles
+  enabled: true
+
+# Battle settings
+battle:
+  # Command restriction during battle
+  command-restriction:
+    # Enable/disable command restriction during boss battle
+    enabled: true
+    # Commands that are allowed during battle (without leading slash)
+    # "boss" command is always allowed
+    allowed-commands:
+      - "msg"
+      - "r"
+      - "tell"
+      - "w"
+    # Permission to bypass command restriction
+    bypass-permission: "mofubossbattle.bypass.commands"
+
+  # Item collection phase settings
+  item-collection:
+    # Show clickable leave command in chat after boss defeat
+    show-leave-command: true
+
+# Debug mode - enables verbose logging
+debug: false
